@@ -1,20 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
-//import reportWebVitals from './reportWebVitals';
+import React from "react";
 
-ReactDOM.render(
-  //<React.StrictMode>
-    <App />,
-  //</React.StrictMode>,
-  document.getElementById('root')
-);
+export default function Datatable({data}) {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-//reportWebVitals();
+    if(data && data.success === true) {
+        const firstObj = data.data[0]
+          return (
+           <div>
+                  <table className="table table-bordered table-dark table-hover table-condensed" >
+                      <thead>
+                          <tr className="table-danger" >
+                              {Object.keys(firstObj).map(key => {
+                                  return (
+                                      <td>
+                                          {key}
+                                     </td>
+                                  )
+                              })}
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {data.data.map(project_data => {
+                              return (
+                                  <tr>
+                                      <td> {project_data.project_id} </td>
+                                      <td> {project_data.project_code} </td>
+                                      <td> {project_data.description} </td>
+                                      <td> {project_data.start_date} </td>
+                                      <td> {project_data.end_date} </td>
+                                      <td> {project_data.company_name} </td>
+                                      <td> {project_data.status} </td>
+                                      </tr>
+                              )
+                          })}
+                      </tbody>
+                  </table>
+            
+              </div>
+              );
+                      }
+                      else{
+                          return (
+                          <div>
+                              <h6> wait</h6>
+                          </div>
+                      )};
+                          }
